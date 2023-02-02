@@ -23,7 +23,7 @@ for i in arr:
     print(i, type(i))
 
 
-def return_path(path_list_suffix):
+def return_path(path_prefix, path_list_suffix):
     path_list = []
     for i in path_list_suffix:
         path = path_prefix + i
