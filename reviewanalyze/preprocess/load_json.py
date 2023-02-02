@@ -21,3 +21,13 @@ for i in arr:
         print(data)
 
     print(i, type(i))
+
+
+def return_path(path_list_suffix):
+    path_list = []
+    for i in path_list_suffix:
+        path = path_prefix + i
+        path_list.append(path)
+
+    return path_list, len(path_list)
+    # 반환값은 항상 하나라서 튜플형태로 반환
