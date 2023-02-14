@@ -29,18 +29,17 @@ def main():
 
     ex_path = arr[len(arr) - 1]
 
-    cnt = 1
     for i in arr:
         with open(path_prefix + i, encoding="UTF-8") as file:
             data = json.load(file)
-            result = json.dumps(data, indent=4, sort_keys=True, ensure_ascii=False)
-            print(result)
+            #result = json.dumps(data, indent=4, sort_keys=True, ensure_ascii=False)
+            #print(result)
             
-            '''
-            print(data)
-            print(data.get("number"))'''
+            num = data.get("number")
+            for i in range(1, num+1):
+                rating_review_pair = data.get("review" + str(i))
+                print('{}/{}'.format(rating_review_pair[0], rating_review_pair[1]), '\n\n')
 
-        cnt += 1
         
 
 if __name__ == "__main__":
