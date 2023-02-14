@@ -20,7 +20,7 @@ class RatingReviewPair:
         return self.review
 
 
-def main():
+def return_rating_review_list():
     list_review = []
 
     path_prefix = "C:\\Users\\IBK\\Desktop\\나만의-우테코\\kakaomap-data-scrap\\reviewdata\\second-trial\\"
@@ -42,6 +42,7 @@ def main():
                 list_review.append(RatingReviewPair(rating_review_pair[0], rating_review_pair[1]))
         
     print(len(list_review))
+    return list_review
 
 if __name__ == "__main__":
-    main()
+    my_list = return_rating_review_list()
