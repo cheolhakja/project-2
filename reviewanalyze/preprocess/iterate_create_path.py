@@ -8,7 +8,7 @@ import json
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-class rating_review:
+class RatingReviewPair:
     def __init__(self, rating, review):
         self.rating = rating
         self.review = review
@@ -38,9 +38,10 @@ def main():
             num = data.get("number")
             for i in range(1, num+1):
                 rating_review_pair = data.get("review" + str(i))
-                print('{}/{}'.format(rating_review_pair[0], rating_review_pair[1]), '\n\n')
-
+                print('{}/{}'.format(rating_review_pair[0], rating_review_pair[1]), '\n\n')          
+                list_review.append(RatingReviewPair(rating_review_pair[0], rating_review_pair[1]))
         
+    print(len(list_review))
 
 if __name__ == "__main__":
     main()
