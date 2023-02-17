@@ -18,6 +18,9 @@ class RatingReviewPair:
     
     def get_review(self):
         return self.review
+    
+    def set_rating(self, rating):
+        self.rating = rating
 
 
 def return_rating_review_list():
