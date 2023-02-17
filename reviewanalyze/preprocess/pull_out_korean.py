@@ -12,8 +12,8 @@ def get_morpheme(x):
     #pos = ['{}/{}'.format(word,tag) for word, tag in pos] : 분류대상 - 분류 를 format형식에 맞게 출력하기 위한 작업.
     return [word for word, _ in pos]
 
-def main(text):
-    get_morpheme(leave_only_korean(text))
+def analyze(text: str) -> str:
+    return get_morpheme(leave_only_korean(text))
     
 def test():
     result = leave_only_korean(u'네, 안녕하세요. 반갑습니다.')
