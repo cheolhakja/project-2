@@ -14,11 +14,12 @@ def execute():
         print(i.get_rating())
     
     for i in range(len(rating_review_list)):
-        analyzed_review = pull_out_korean.analyze(rating_review_list[i].get_review()) #모든 리뷰 데이터의 별점을 0과 1로 바꿈
-        rating_review_list[i].set_review(analyzed_review) #모든 리뷰 데이터의 별점을 0과 1로 바꿈
+        analyzed_review = pull_out_korean.analyze(rating_review_list[i].get_review()) 
+        rating_review_list[i].set_review(analyzed_review) 
 
     for i in rating_review_list:
         print(i.get_review())
+        print(type(i.get_review())) #맨처음에는 rating_review_pair에서 review가 str 이었는데 list로 바뀌었네? 이게 되나?
 
 if __name__ == "__main__":
     execute()
