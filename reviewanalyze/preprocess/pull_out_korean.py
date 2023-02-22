@@ -13,8 +13,8 @@ def get_morpheme(x):
     return [word for word, _ in pos]
 
 def analyze(text: str) -> str:
-    return get_morpheme(leave_only_korean(text))
-    
+    return get_morpheme(leave_only_korean(text)) #한글만 추출한 뒤 형태소 분석해서 리스트로 반환하는 코드
+
 def test():
     result = leave_only_korean(u'네, 안녕하세요. 반갑습니다.')
     print(result)
