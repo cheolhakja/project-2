@@ -5,3 +5,4 @@
 * `import module` or `copy pre written code `
   * complete the project first 
   * 모듈화
+* 리뷰가 빈칸인 경우 무시하는 기능 추가
