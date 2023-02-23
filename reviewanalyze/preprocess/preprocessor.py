@@ -15,7 +15,6 @@ def execute():
     rating_review_list = (
         iterate_create_path.return_rating_review_list()
     )  # JSON파일을 리스트로 불러옴
-    print(type(rating_review_list))
 
     for i in range(len(rating_review_list)):
         new_rating = rating_converter.convert(
@@ -27,9 +26,8 @@ def execute():
         analyzed_review = pull_out_korean.leave_only_korean(rating_review_list[i].get_review())
         rating_review_list[i].set_review(analyzed_review) #리뷰에서 한글만 추출함
 
-    only_korean_review_list = []
+    only_korean_review_list = []  #Pair객체에서 리뷰만 빼서 리스트로 만들어봄
     for i in rating_review_list:
-        print(i.get_review(), '\n')
         only_korean_review_list.append(i.get_review())
 
     return only_korean_review_list    
