@@ -3,7 +3,8 @@ import rating_converter
 import pull_out_korean
 from sklearn.feature_extraction.text import CountVectorizer
 from konlpy.tag import Okt
-
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.linear_model import LogisticRegression
 
 def get_pos(x):
     tagger = Okt()
@@ -27,16 +28,43 @@ def execute():
         rating_review_list[i].set_review(analyzed_review) #리뷰에서 한글만 추출함
 
     only_korean_review_list = []  #Pair객체에서 리뷰만 빼서 리스트로 만들어봄
-    for i in rating_review_list:
-        only_korean_review_list.append(i.get_review())
+    rating_list = []
+    
+    for n, rating_review_pair_object in enumerate(rating_review_list):
+        if(rating_review_pair_object.get_review() == ""):
+            continue 
+            #리뷰가 비어있으면 무시한다
 
-    return only_korean_review_list    
+        else:
+            only_korean_review_list.append(rating_review_pair_object.get_review())
+            rating_list.append(rating_review_pair_object.get_rating())
+
+
+    '''for i in rating_review_list
+        only_korean_review_list.append(i.get_review())
+    
+    for i in rating_review_list
+        rating_list.append(i.get_rating())'''
+
+    return rating_list, only_korean_review_list
+
+def convert_to_TF_IDF(matrix):
+    tfidf_vectorizer = TfidfTransformer()
+    matrix = tfidf_vectorizer.fit_transform(matrix)
+    return matrix
 
 
 if __name__ == "__main__":
-    result_list = execute()
+    rating_list, review_list = execute()
 
     index_vectorizer = CountVectorizer(tokenizer=lambda x: get_pos(x))
-    X = index_vectorizer.fit_transform(result_list)
+    X = index_vectorizer.fit_transform(review_list)
     print(X.shape)
+    print(type(X))
+    print(X[1])
+    X = convert_to_TF_IDF(X)
+
+    lr = LogisticRegression(random_state=0)
+    lr.fit(X, rating_list)
+
     ##해결 CountVectorize의 tokenizer로 넘겨주면 되겟네 pull_out_korean의 analyze를
