@@ -5,13 +5,21 @@ import json
 from pandas import read_csv
 
 
-def write_csv():
-    f = open('write.csv','w', newline='')
+def write_csv(rating_list, review_list):
+    f = open(R'C:\Users\IBK\Desktop\나만의-우테코\kakaomap-data-scrap\reviewdata\csv\all_review.csv','w', newline='')
     wr = csv.writer(f)
-    wr.writerow([1,'림코딩', '부산'])
-    wr.writerow([2,'김갑환', '서울'])
- 
-    f.close()
+
+    for i in range(len(rating_list)):
+        li = []
+        li.append(rating_list[i])
+        li.append(review_list[i])
+        wr.writerow(li)
+
+    f.close()   
+
+    df = read_csv(R'C:\Users\IBK\Desktop\나만의-우테코\kakaomap-data-scrap\reviewdata\csv\all_review.csv', encoding='cp949')
+    df.columns = ['y', 'ko_text']
+    df.to_csv(R'C:\Users\IBK\Desktop\나만의-우테코\kakaomap-data-scrap\reviewdata\csv\all_review.csv')
 
 if __name__ == "__main__":
     a = [1,'림코딩', '부산']
