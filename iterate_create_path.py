@@ -68,6 +68,25 @@ def return_review_rating_list_using_parameter(path_prefix: str, path: str) -> li
     print(len(list_review))
     return list_review
 
+def return_review_rating_list_using_parameter_2(path_prefix: str, path: str):
+    list_review = []
+
+    arr = os.listdir(path) #'파일이름'을 가져오는 코드
+
+    for i in arr:
+        with open(path_prefix + i, encoding="UTF-8") as file:
+            data = json.load(file)
+            
+            num = data.get("number")
+            for i in range(1, num+1):
+                rating_review_pair = data.get("review" + str(i))
+                tmp_rating = rating_review_pair[0]
+                tmp_review = rating_review_pair[1]
+                list_review.append((tmp_rating, tmp_review))
+        
+    print(len(list_review))
+    return list_review
+
 
 if __name__ == "__main__":
     my_list = return_rating_review_list()

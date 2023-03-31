@@ -78,6 +78,60 @@ def preprocess(rating_review_list):
 
     return rating_list, only_korean_review_list
 
+def preprocess_2(rating_review_list):
+    for i in range(len(rating_review_list)):
+        new_rating = rating_converter.convert(
+            rating_review_list[i].get_rating()
+        )  # 모든 리뷰 데이터의 별점을 0과 1로 바꿈
+        rating_review_list[i].set_rating(new_rating)  # 모든 리뷰 데이터의 별점을 0과 1로 바꿈
+
+    for i in range(len(rating_review_list)):
+        analyzed_review = pull_out_korean.leave_only_korean(rating_review_list[i].get_review())
+        rating_review_list[i].set_review(analyzed_review) #리뷰에서 한글만 추출함
+
+    only_korean_review_list = []  #Pair객체에서 리뷰만 빼서 리스트로 만들어봄
+    rating_list = []
+    
+    for n, rating_review_pair_object in enumerate(rating_review_list):
+        if(rating_review_pair_object.get_review() == ""):
+            continue 
+            #리뷰가 비어있으면 무시한다
+
+        else:
+            only_korean_review_list.append(rating_review_pair_object.get_review())
+            rating_list.append(rating_review_pair_object.get_rating())
+
+    return rating_list, only_korean_review_list
+
+def preprocess_3(rating_review_list):
+    for i in range(len(rating_review_list)):
+        new_rating = rating_converter.convert(
+            rating_review_list[i][0]
+        )  # 모든 리뷰 데이터의 별점을 0과 1로 바꿈
+        
+    
+        analyzed_review = pull_out_korean.leave_only_korean(rating_review_list[i][1])
+        rating_review_list[i] = (new_rating, analyzed_review)
+
+    only_korean_review_list = []  #Pair객체에서 리뷰만 빼서 리스트로 만들어봄
+    rating_list = []
+    
+    for n, rating_review_pair_object in enumerate(rating_review_list):
+        if(rating_review_pair_object[1] == ""):
+            continue 
+            #리뷰가 비어있으면 무시한다
+
+        else:
+            only_korean_review_list.append(rating_review_pair_object[1])
+            rating_list.append(rating_review_pair_object[0])
+
+    return rating_list, only_korean_review_list
+        
+
+    
+
+def concat_list(list_1: list, list_2: list) -> list:
+    return list_1 + list_2
 
 if __name__ == "__main__":
     rating_list, review_list = execute()
